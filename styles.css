@@ -1,58 +1,115 @@
-:root{
-    --purple:#2F192E;
-    --purple-light:#30192d;
-    --dark-blue:#012677;
-    --blue:#5c65c0;
-    --skyblue :#00b4fc;
-    --light-blue:#005bc5;
-    --dark-pink:#f64c57;
-    --dark-magenta:#e21b5a;
-    --green:#2cb13e;
-    --light-green:#61e2c2;
-    --light-purple:#d9abff;
-}
-*{
+@import url('https://fonts.googleapis.com/css2?family=Anaheim&display=swap')
+* {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    padding:0;
-    margin:0;
-    text-decoration: none;
-    font-family: poppins,sans-serif;
 }
-body{
-    background: linear-gradient(45deg, var(--green),var(--purple-light));
+html{
+    font-size: 10px;
+    font-family: "Anaheim", sans-serif;
+}
+a{
+    text-decoration: none;
 }
 .container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 100%;
+    min-height: 100vh;
     width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content:  center;
     flex-wrap: wrap;
-    position: relative;
 }
+body {
+    background: radial-gradient(circle at 125% -50%, rgb(26, 110, 15) 20%, rgb(4, 20, 1) 30%, rgb(4, 16, 1) 35%, rgb(4, 12, 1) 40%, rgb(0, 10, 0) 50%);
+}
+
+/*Hero Section*/
+#hero{
+    flex: 1;
+    margin-right: 300px;
+    margin-top: 150px;
+}
+#hero::after{
+    position:absolute;
+    left: 0;
+    top: 0;
+    height:100%;
+    width: 100%;
+    background-color: black;
+    opacity: .7;
+    z-index: -1;
+}
+#hero .hero{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    justify-content: flex-start;
+}
+#hero h1{
+    display: block;
+    width: fit-content;
+    font-size: 4rem;
+    position: relative;
+    color: transparent;
+    animation: text_reveal .5s ease forwards;
+    animation-delay: 1s;
+}
+#hero h1:nth-child(1){
+    animation-delay: 1s;
+}
+#hero h1:nth-child(2){
+    animation: text_reveal_name .5s ease forwards;
+    animation-delay: 2s;
+}
+#hero h1 span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgb(77, 185, 77);
+    animation: text_reveal_box 1s ease;
+    animation-delay: 1s;
+}
+#hero h1:nth-child(1) span{
+    animation-delay: .5s;
+}
+#hero h1:nth-child(2) span{
+    animation-delay: 1.5s;
+}
+#hero .cta{
+    display: inline-block;
+    padding: 10px 30px;
+    color: white;
+    background-color: transparent;
+    font-size: 2rem;
+    border: 2px solid rgb(77, 185, 77);
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+    transition: .3s ease-in;
+    transition-property: background-color, color;
+}
+#hero .cta:hover{
+    color: white;
+    background-color: rgb(77, 185, 77);
+}
+/*Snapshot Section*/
 .profile-card{
-    background-color: rgba(15, 15, 15, 0.904);
-    width:400px;
+    /* background-color: #186413;
+    background-image: linear-gradient(315deg, #162915 0%, #030f04 74%); */
+
+    width:600px;
     padding: 3rem;
     border-radius: 10px;
     min-height: 400px;
     position: relative;
     color:#fff;
-    margin: 15px;
+    margin-left: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-}
-.profile-card .profile-pic{
-    margin-top: 15px;
-    overflow: hidden;
-}
-.profile-card .profile-pic img{
-    max-width: 100%; 
-    height: auto; 
-    width: 300px; 
-    border-radius: 10px;
 }
 .profile-card .profile-details{
     display: flex;
@@ -64,18 +121,17 @@ body{
 .profile-details .intro{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     flex-direction: column;
 }
 .profile-details .intro h2{
-    margin-top: 20px;
+    font-size: 5rem;
+    max-width: 500px;
 }
 .profile-details .intro h4{
-    background: #1d1d1d;
-    font-weight: 400;
-    border-radius: 4px;
-    padding: 5px 10px;
-    margin: 8px;
+    font-size: 1.5rem;
+    font-weight: 100;
+    max-width: 300px;
 }
 .profile-details .intro .social{
     margin-top: 10px;
@@ -84,147 +140,72 @@ body{
 .profile-details .intro .social i{
     color:#ddd;
     font-size: 16px;
-    background-color:#222;
-    margin: 5px;
+
     height: 35px;
-    width:35px;
+    width: 35px;
     line-height: 35px;
     text-align: center;
+    
     border-radius: 5px;
-    border: 1px solid transparent; /* Add transparent border initially */
-    transition: border-color 0.5s; /* Transition border color */
+    border: 1px solid transparent;
+    transition: border-color 1s, transform .3s ease; 
 }
 .profile-details .intro .social i:hover{
     transform: scale(1.2);
-    border-color: rgba(255, 255, 255, 0.3); /* Change border color on hover */
+    border-color: rgba(53, 167, 72, 0.514); /* Change border color on hover */
 }
-.profile-details .about-me{
-    background-color: #1d1d1d;
-    padding: 15px;
-    border-radius: 10px;
-    width: 100%;
-}
-.profile-details .about-me .row{
+.profile-details .techstack {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding: 10px 0;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
-.about-me .row .icon{
-    height: 40px;
-    width: 40px;
-    line-height: 40px;
-    border-radius: 5px;
-    background-color: #111;
-    text-align: center;
-    color:#fff;
-    transition: 0.5s;
-}
-.row .icon:hover{
-    transform:scale(1.2);
-    border:1px solid rgba(255,255,255,0.1);
-}
-.row .content{
-    text-align: center;
-    font-weight: normal;
-    min-width: 70%;
-}
-.row .content .p{
-    margin:0px;
-}
-.row .content span{
-    font-size: 12px;
-}
-.download-btn{
-    background: linear-gradient(45deg, #f64c57,#e21b5a);
-    color:#fff;
-    padding: 1rem 3rem;
-    border-radius: 30px;
-    margin-top: 1.5rem;
-    border:none;
-}
-.download-btn a {
-    color: inherit; /* Inherit color from parent */
-    text-decoration: none; /* Remove underline */
-}
-
-.button-text {
-    color: #fff; /* Set color for button text */
-}
-/*****portfolio section ****/
-.portfolio{
-    background-color: rgba(15, 15, 15, 0.904);
-    max-width: 800px;
-    padding: 2rem 3rem;
-    border-radius: 10px;
-}
-.portfolio h1{
-    color:#f2f2f2;
-    margin-bottom: 1.1rem;
-    position: relative;
+.profile-details .techstack h4 {
+    margin-right: 50px;
+    font-weight: bold;
     display: inline-block;
-    font-size: 3.5rem;
+    position: relative;
 }
-.portfolio h1::after{
-    position: absolute;
-    content: "";
-    top:50%;
-    right:-50%;
-    width:45%;
-    height: 3px;
-    background: linear-gradient(45deg, #f64c57,#e21b5a);
+.profile-details .techstack h4::after {
+    content: ''; /* No content */
+    position: absolute; /* Position the separator */
+    top: 50%; /* Align vertically */
+    right: -30px; /* Adjust distance from h4 */
+    width: 2px; /* Set the width of the line */
+    height: 50px; /* Set the height (thickness) of the line */
+    background-color: green; /* Set color */
+    transform: translateY(-50%); /* Center vertically */
 }
-.portfolio h2{
-    color:#f2f2f2;
-    font-size: 2rem;
-    margin:0.5rem 0;
+.profile-details .techstack img.tech-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    padding: 10px;
 }
-.portfolio p{
-    color:#555;
-    margin:1.5rem 0;
-}
-.portfolio .work{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-}
-.work .workbox{
-    display: flex;
-    justify-content: space-between;
-    border-radius:8px;
-    border:1px solid #333;
-    padding: 1rem;
-    margin:1rem;
 
-}
-.work .workbox .desc{
-    width:75%;
-    color:#555;
-}
-.work .workbox .desc h3{
-    color:#f2f2f2;
-    margin-bottom: 3px;
-}
-.work .workbox .desc p{
-    margin:0px;
-}
-/***Responsive Design ***/
-@media(max-width:768px)
-{
-    .portfolio{
-        width: 1005;
-        max-width: 400px;
-        padding:1rem;
-        margin:1rem;
 
+
+/*End Hero Section*/
+
+/*Keyframes*/
+@keyframes text_reveal_box{
+    50%{
+        width:100%;
+        left:0;
     }
-    .portfolio h1{
-        font-size: 2.2rem;
-    }
-    .portfolio .work{
-        grid-template-columns: repeat(1,1fr);
-        grid-template-rows: repeat(4,auto);
+    100%{
+        width:0;
+        left:100%;
     }
 }
+@keyframes text_reveal{
+    100%{
+        color: white;
+    }
+}
+@keyframes text_reveal_name{
+    100%{
+        color: rgb(77, 185, 77);
+    }
+}
+/*End Keyframes*/
+
