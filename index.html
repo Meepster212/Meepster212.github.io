@@ -38,8 +38,15 @@
          </div>
          <div class="hero">
             <div>
-               <h1>print("Hi World!") <span></span></h1>
-               <h1>> Hi World! <span></span></h1>
+                <h1>Print Terminal</h1>
+                <h2 contenteditable="true" id="editableString">print("Hi World!") <span></span></h1>
+                <input type="button" class="button btn-hov" value="Compile" onclick="compilePrint()">
+                <div class="loading-dots" id="loadingDots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+               <h2 id="printedString" style="animation-name: text_hide_name;">> Hi World! <span></span></h1>
             </div>
          </div>
         
@@ -47,5 +54,60 @@
     </div>
    </section>
    <!-- End Hero Section -->
+   <script>
+        window.onload = function() {
+            var printedString = document.getElementById("printedString");
+            var eventName = 'animationend';
+            printedString.addEventListener(eventName, animEnd);
+            function animEnd(e) {
+                e.srcElement.style.animationName = "text_reveal_name";
+            } 
+        };
+  
+        function animatePrint(animationName, delay = 0) {
+            var printedString = document.getElementById("printedString");
+            setTimeout(function() {
+                printedString.style.animationName = animationName;
+            }, delay);
+        }
+        var hasCompiledOnce = false; // Flag to track if print has been compiled once
+        function runAnimation() {
+            var dots = document.querySelectorAll('.dot');
+            dots.forEach(function(dot) {
+                dot.classList.add('loading');
+            });
+
+            // Remove the animation class after the animation completes
+            setTimeout(function() {
+                dots.forEach(function(dot) {
+                    dot.classList.remove('loading');
+                });
+            }, 1300); // Duration of the animation in milliseconds
+        }
+
+        function compilePrint() {
+            setTimeout(function() {
+                var printString = document.getElementById('editableString').innerText.trim();
+                var startIndex = printString.indexOf('print("');
+                var endIndex = printString.lastIndexOf('")');
+                
+                if (startIndex !== -1 && endIndex !== -1 && startIndex < endIndex) {
+                    var compiledString = printString.substring(startIndex + 7, endIndex);
+                    var printedStringElement = document.getElementById('printedString');
+                    printedStringElement.innerText = ">" + compiledString;
+                } else {
+                    document.getElementById('printedString').innerText = "Error. Incorrect print statement detected.";
+                }
+                runAnimation();
+                if (!hasCompiledOnce) {
+                    animatePrint("text_hide_name");
+                    hasCompiledOnce = true; // Update flag after first compilation
+                } else {
+                    animatePrint("text_hide_name", 0); // Set animation delay to 0s after first compilation
+                }
+
+            }, -200); // Adjust this delay as needed to match your animation timing
+        }
+    </script>
 </body>
 </html>
